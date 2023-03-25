@@ -52,7 +52,7 @@ class Logic:
                     
 
     def input_logic(self, player) -> bool:
-        position = int(input("Player , Digite uma posição ? "))
+        position = int(input(f"Player {'X' if player == 1 else 'O'} , Enter your Position ? "))
 
         pos_x = 0 
         pos_y = 0
