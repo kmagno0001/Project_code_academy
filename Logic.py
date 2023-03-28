@@ -1,3 +1,4 @@
+import os
 
 width = 3
 hight = 3    
@@ -9,26 +10,35 @@ empty_space = ["******", "*    *", "*    *","*    *", "******"]
 
 class Logic:
     board = [[0 for i in range(hight) ] for j in range(width)]
-
     winner = 0
 
     def __init__(self) -> None:
         self.game_running = True
 
     def drawing(self) -> None:
+        os.system('cls')
+        
+        A, B, C = 1, 2, 3
         for row in range(hight):
+           
             for par in range(parallel):
                 for col in range(width):
+                    
                     if self.board[row][col] == 0:
                         print(empty_space[par], end=' ')
+
                     if self.board[row][col] == 1:
                         print(x_[par], end=' ')
+
                     if self.board[row][col] == 2:
                         print(o_[par], end=' ')        
                 print()
-            print()    
+            print(f"   {A}      {B}      {C}") 
+            A += 3
+            B += 3
+            C += 3
 
-    def game_logic(self, player:int) -> None:
+    def game_logic(self, player:int) -> bool:
        
         def checking_winner(player):
             count = 0
@@ -39,7 +49,7 @@ class Logic:
                     if self.board[plays[0]][plays[1]] == player:
                         count += 1
                 if count == 3:
-                    break;
+                    break
                 else:
                     count = 0
 
@@ -51,7 +61,7 @@ class Logic:
            return True        
                     
 
-    def input_logic(self, player) -> bool:
+    def input_logic(self, player) -> None:
         position = int(input(f"Player {'X' if player == 1 else 'O'} , Enter your Position ? "))
 
         pos_x = 0 
@@ -59,7 +69,7 @@ class Logic:
 
         if position == 10:
             self.game_running = False
-            return True
+           
         elif position in [1,2,3]:
             pos_x = 0
             pos_y = position - 1
@@ -74,9 +84,10 @@ class Logic:
 
         if self.board[pos_x][pos_y] == 0:
             self.board[pos_x][pos_y] = player
-            return False
+        elif self.board[pos_x][pos_y] == player:
+            return self.input_logic(player)    
+        
     def print_the_winner(self)-> None:
-
         print(f"Winner of the game was {'X' if self.winner == 1 else 'O' } Player")    
         
        
