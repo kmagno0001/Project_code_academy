@@ -13,7 +13,7 @@ class Logic:
     winner = 0
 
     def __init__(self) -> None:
-        self.game_running = True
+        self.game_running = True    
 
     def drawing(self) -> None:
         os.system('cls')
